@@ -34,7 +34,10 @@ public class EktoplasmMusic {
         albums.parallelStream().forEach(album -> {
             final String outFileName = new File(album.getMP3FileName()).getAbsolutePath();
             try {
-                web.download(Transaction.create(album.getMP3Url()), outFileName);
+                if(!new File(outFileName).exists()) {
+                    web.download(Transaction.create(album.getMP3Url()), outFileName+".part");
+                    new File(outFileName + ".part").renameTo(new File(outFileName));
+                }
                 System.out.println(album.getMP3FileName()  + " downloaded.");
             } catch (Exception e) {
                 if (new File(outFileName).exists()) {
