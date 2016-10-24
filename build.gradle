@@ -1,0 +1,27 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    compile('com.github.amage:webcrawler:58ee2c4')
+
+    /* logging */
+    compile 'org.slf4j:slf4j-api:1.7.3'
+    compile 'org.slf4j:log4j-over-slf4j:1.7.3'
+    compile 'ch.qos.logback:logback-classic:1.0.10'
+
+    /* Test */
+    testCompile 'junit:junit:4.8.2'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = 3.1
+}
